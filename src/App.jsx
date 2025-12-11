@@ -1,47 +1,25 @@
-import React, { useState } from "react";
-import Header from "./components/Header";
-import CardGrid from "./components/CardGrid";
-import Modal from "./components/Modal";
-import CartAside from "./components/CartAside";
-import products from "./data/products";
+import React from "react";
+import Home from "./components/Home";
+import { Route, Routes } from "react-router-dom";
+import Reservas from "./components/Reservas";
+import Infomarcion from "./components/Infomarcion";
+import Especiales from "./components/Especiales";
 
 export default function App() {
-  const [selected, setSelected] = useState(null); // producto seleccionado
-  const [isOpen, setIsOpen] = useState(false);
-  const [cartItems, setCartItems] = useState([]); // {productId, color, qty}
-
-  function openProduct(product) {
-    setSelected({ ...product, chosenColor: product.colors[0] });
-    setIsOpen(true);
-  }
-
-  function changeColor(color) {
-    setSelected((prev) => (prev ? { ...prev, chosenColor: color } : prev));
-  }
-
-  function addToCart() {
-    if (!selected) return;
-    setCartItems((prev) => {
-      const key = `${selected.id}-${selected.chosenColor}`;
-      const found = prev.find((i) => i.key === key);
-      if (found)
-        return prev.map((i) => (i.key === key ? { ...i, qty: i.qty + 1 } : i));
-      return [
-        ...prev,
-        {
-          key,
-          id: selected.id,
-          name: selected.name,
-          color: selected.chosenColor,
-          qty: 1,
-          price: selected.price,
-        },
-      ];
-    });
-  }
-
   return (
-    <div className="min-h-screen p-6">
+    <>
+      <Routes>
+        <Route path="/" element={<Home />}>
+          <Route index element={<Infomarcion />} />
+          <Route path="reserva" element={<Reservas />} />
+          <Route path="pedidos" element={<Especiales />} />
+        </Route>
+      </Routes>
+    </>
+  );
+}
+{
+  /* <div className="min-h-screen p-6 bg-[#1A1A1A]">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2">
           <Header />
@@ -59,12 +37,8 @@ export default function App() {
           product={selected}
           onClose={() => setIsOpen(false)}
           onChangeColor={changeColor}
-          onAdd={() => {
-            addToCart();
-            setIsOpen(false);
-          }}
+          onAdd={addToCart}
         />
       )}
-    </div>
-  );
+    </div> */
 }
