@@ -11,6 +11,7 @@ export default function Reservas() {
   const [isOpen, setIsOpen] = useState(false);
   const [cartItems, setCartItems] = useState([]); // prducto por color y imagen
 
+  /* modal con producto */
   function openProduct(product) {
     setSelected({
       ...product,
@@ -20,7 +21,7 @@ export default function Reservas() {
     });
     setIsOpen(true);
   }
-
+  /* cambia img con producto */
   function changeColor(index) {
     setSelected((prev) =>
       prev
@@ -33,7 +34,7 @@ export default function Reservas() {
         : prev
     );
   }
-
+  /* añadir al carro */
   function addToCart() {
     if (!selected) return;
     const key = `${selected.id} - ${selected.colorIndex}`;

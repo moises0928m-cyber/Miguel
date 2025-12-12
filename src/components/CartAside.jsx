@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Toast from "./hooks/Toast";
-import { data } from "react-router-dom";
 
 export default function CartAside({ items }) {
   const [toast, setToast] = useState({
