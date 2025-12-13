@@ -4,7 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import Reservas from "./components/Reservas";
 import Infomarcion from "./components/Infomarcion";
 import Especiales from "./components/Especiales";
-import Login from "./components/login";
+import Login from "./components/Login";
 import Admin from "./components/Admin";
 import Protector from "./components/Protector";
 
