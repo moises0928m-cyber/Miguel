@@ -42,10 +42,10 @@ export default function Especiales() {
       );
 
       const json = await res.json();
-      console.log(" Respuesta de Cloudinary:", json);
+      console.log("Respuesta de Cloudinary:", json);
 
       if (json.error) {
-        console.error(" Error de Cloudinary:", json.error);
+        console.error("Error de Cloudinary:", json.error);
         return null;
       }
 

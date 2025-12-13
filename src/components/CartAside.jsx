@@ -33,7 +33,7 @@ export default function CartAside({ items }) {
      Total:$${total}
      Fecha: ${new Date().toLocaleString()}`;
 
-    const numero = "59163447456";
+    const numero = "59173163291";
 
     const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
 
@@ -41,6 +41,7 @@ export default function CartAside({ items }) {
 
     Show("Pedido enviado por WhatsApp", "success");
   };
+  console.log(items);
 
   return (
     <>
@@ -58,7 +59,7 @@ export default function CartAside({ items }) {
             >
               <div className="flex items-center gap-3">
                 <img
-                  src={`/images/${it.image}`}
+                  src={it.image}
                   alt={it.name}
                   className="w-10 h-10 rounded-md object-contain"
                 />

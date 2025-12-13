@@ -25,11 +25,11 @@ export default function Login({ onLogin }) {
 
     try {
       const respuesta = await fetch(
-        "https://api-funval-g6.onrender.com/auth/login",
+        "https://api.escuelajs.co/api/v1/auth/login",
         {
           method: "POST",
           headers: {
-            "Content-type": "application/json",
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({
             email,
@@ -48,18 +48,40 @@ export default function Login({ onLogin }) {
       console.log(data);
 
       localStorage.setItem("token", data.access_token);
-      localStorage.setItem("role", data.user_role);
+      localStorage.setItem("refresh", data.refresh_token);
 
-      if (data.user_role === "admin") {
-        onLogin(data.user_name);
+      const repuestaPerfil = await fetch(
+        "https://api.escuelajs.co/api/v1/auth/profile",
+        {
+          headers: {
+            Authorization: `Bearer ${data.access_token}`,
+          },
+        }
+      );
+
+      const perfil = await repuestaPerfil.json();
+      console.log(perfil);
+
+      localStorage.setItem("role", perfil.role);
+      localStorage.setItem("name", perfil.name);
+
+      const adminUsuario = JSON.parse(
+        localStorage.getItem("adminUsuario") || "[]"
+      );
+      const adminHere = adminUsuario.includes(email);
+
+      if (perfil.role === "admin" || adminHere) {
+        onLogin(perfil.name);
         navigate("/admin");
       } else {
         setError("No tienes permiso para entrar aquí.");
         localStorage.removeItem("token");
         localStorage.removeItem("role");
+        localStorage.removeItem("name");
+        localStorage.removeItem("refresh");
       }
     } catch (erro) {
-      setError("Error de conexión con el servidor");
+      setError("Error de conexión con el servidor", erro);
     } finally {
       setLoading(false);
     }
@@ -85,6 +107,7 @@ export default function Login({ onLogin }) {
                   Correo
                 </label>
                 <input
+                  value={email}
                   type="email"
                   onChange={(e) => setEmail(e.target.value)}
                   className="mt-1 p-2 rounded-lg text-xl   focus:outline-none focus:ring "
@@ -97,6 +120,7 @@ export default function Login({ onLogin }) {
                   Contraseña
                 </label>
                 <input
+                  value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   type="password"
                   className="mt-1 p-2 rounded-lg"
