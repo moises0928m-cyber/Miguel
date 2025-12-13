@@ -1,12 +1,12 @@
 // Services.js - API de Platzi
 const API_BASE_URL = "https://api.escuelajs.co/api/v1";
 
-// 🔸 Función auxiliar para obtener el token
+// Función auxiliar para obtener el token
 const getToken = () => {
   return localStorage.getItem("token");
 };
 
-// 🔸 Función auxiliar para manejar errores
+//  Función auxiliar para manejar errores
 const handleResponse = async (response) => {
   if (!response.ok) {
     const error = await response.json().catch(() => ({}));
@@ -18,7 +18,7 @@ const handleResponse = async (response) => {
 // ==================== PRODUCTOS ====================
 
 /**
- * 🔹 Obtener todos los productos
+ *  Obtener todos los productos
  * GET /products
  */
 export const getProducts = async (limit = 10) => {
@@ -30,13 +30,13 @@ export const getProducts = async (limit = 10) => {
 
     console.log(`✅ API respondió con ${data?.length || 0} productos`);
 
-    // 🔹 Validar que sea un array
+    //  Validar que sea un array
     if (!Array.isArray(data)) {
       console.error("❌ La API no devolvió un array:", data);
       return [];
     }
 
-    // 🔹 Filtrar productos válidos
+    //  Filtrar productos válidos
     const productosValidos = data.filter((p) => {
       const esValido = p && typeof p === "object" && p.id;
       if (!esValido) {
@@ -55,7 +55,7 @@ export const getProducts = async (limit = 10) => {
 };
 
 /**
- * 🔹 Obtener un producto por ID
+ *  Obtener un producto por ID
  * GET /products/{id}
  */
 export const getProductById = async (id) => {
@@ -69,7 +69,7 @@ export const getProductById = async (id) => {
 };
 
 /**
- * 🔹 Crear un nuevo producto (requiere autenticación)
+ *  Crear un nuevo producto (requiere autenticación)
  * POST /products
  */
 export const createProduct = async (productData) => {
@@ -97,7 +97,7 @@ export const createProduct = async (productData) => {
 };
 
 /**
- * 🔹 Actualizar un producto (requiere autenticación)
+ *  Actualizar un producto (requiere autenticación)
  * PUT /products/{id}
  */
 export const updateProduct = async (id, productData) => {
@@ -125,7 +125,7 @@ export const updateProduct = async (id, productData) => {
 };
 
 /**
- * 🔹 Eliminar un producto (requiere autenticación)
+ * Eliminar un producto (requiere autenticación)
  * DELETE /products/{id}
  */
 export const deleteProduct = async (id) => {
@@ -153,7 +153,7 @@ export const deleteProduct = async (id) => {
 // ==================== CATEGORÍAS ====================
 
 /**
- * 🔹 Obtener todas las categorías
+ *  Obtener todas las categorías
  * GET /categories
  */
 export const getCategories = async () => {
@@ -167,7 +167,7 @@ export const getCategories = async () => {
 };
 
 /**
- * 🔹 Obtener productos por categoría
+ *  Obtener productos por categoría
  * GET /categories/{id}/products
  */
 export const getProductsByCategory = async (categoryId) => {
@@ -185,7 +185,7 @@ export const getProductsByCategory = async (categoryId) => {
 // ==================== AUTENTICACIÓN ====================
 
 /**
- * 🔹 Obtener perfil del usuario autenticado
+ *  Obtener perfil del usuario autenticado
  * GET /auth/profile
  */
 export const getUserProfile = async () => {
@@ -212,14 +212,14 @@ export const getUserProfile = async () => {
 // ==================== UTILIDADES ====================
 
 /**
- * 🔹 Verificar si el usuario está autenticado
+ *  Verificar si el usuario está autenticado
  */
 export const isAuthenticated = () => {
   return !!getToken();
 };
 
 /**
- * 🔹 Cerrar sesión
+ *  Cerrar sesión
  */
 export const logout = () => {
   localStorage.removeItem("token");

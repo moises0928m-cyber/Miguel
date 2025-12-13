@@ -17,7 +17,7 @@ export default function Card({ producto, onOpen }) {
     return `/images/${imagenPath}`;
   };
 
-  // 🔹 Obtener la primera imagen de forma segura
+  //  Obtener la primera imagen de forma segura
   const obtenerPrimeraImagen = () => {
     // Verificar si producto existe y tiene images
     if (!producto || !producto.images || !Array.isArray(producto.images)) {
@@ -34,7 +34,7 @@ export default function Card({ producto, onOpen }) {
 
   const imagenProducto = obtenerPrimeraImagen();
 
-  // 🔹 Validación: Si no hay producto, no renderizar nada
+  //  Validación: Si no hay producto, no renderizar nada
   if (!producto) {
     console.error("Card recibió un producto undefined");
     return null;
@@ -47,13 +47,13 @@ export default function Card({ producto, onOpen }) {
       className="p-3 bg-[#1F1F1F] text-white rounded-md cursor-pointer hover:bg-[#2F2F2F] border border-[#3A3A3A] transition"
       onClick={onOpen}
     >
-      {/* 🔹 Imagen del producto con manejo seguro */}
+      {/*  Imagen del producto con manejo seguro */}
       <img
         src={imagenSrc(imagenProducto)}
         alt={producto.name || "Producto"}
         className="w-full h-48 object-cover mb-4 rounded-md"
         onError={(e) => {
-          // 🔹 CORRECCIÓN: e.target.src (no e.target.value)
+          //  CORRECCIÓN: e.target.src (no e.target.value)
           e.target.src = "https://via.placeholder.com/300x200?text=Sin+Imagen";
         }}
       />

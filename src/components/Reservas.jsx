@@ -24,15 +24,15 @@ export default function Reservas() {
         console.log("📦 Productos obtenidos de la API:", data);
         console.log("📊 Total recibido:", data?.length || 0);
 
-        // 🔹 VALIDACIÓN: Asegurarnos de que solo procesemos 10
+        //  VALIDACIÓN: Asegurarnos de que solo procesemos 10
         if (!Array.isArray(data)) {
           throw new Error("La API no devolvió un array");
         }
 
-        // 🔹 IMPORTANTE: Tomar solo los primeros 10 y filtrar válidos
+        //  IMPORTANTE: Tomar solo los primeros 10 y filtrar válidos
         const productoTransformer = data
-          .slice(0, 10) // ✅ FORZAR límite a 10
-          .filter((product) => product && product.id) // ✅ Filtrar válidos
+          .slice(0, 10) //  FORZAR límite a 10
+          .filter((product) => product && product.id) //  Filtrar válidos
           .map((product) => {
             // Asegurar que images siempre sea un array válido
             const imagenes = Array.isArray(product.images)
@@ -65,7 +65,7 @@ export default function Reservas() {
         setProducto(productoTransformer);
         setError(null);
       } catch (err) {
-        console.error("❌ Error al cargar productos:", err);
+        console.error(" Error al cargar productos:", err);
         setError("No se pudieron cargar los productos");
       } finally {
         setLoading(false);
@@ -152,7 +152,7 @@ export default function Reservas() {
         <CartAside items={cartItems} />
       </div>
 
-      {/* ✅ CORRECCIÓN: producto (no product) */}
+      {/*  CORRECCIÓN: producto (no product) */}
       {isOpen && selected && (
         <Modal
           producto={selected}

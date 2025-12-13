@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function Modal({ producto, onClose, onChangeColor, onAdd }) {
-  // 🔹 Función para obtener la URL de la imagen
+  //  Función para obtener la URL de la imagen
   const imagenSrc = (imagenPath) => {
     if (!imagenPath) {
       return "https://via.placeholder.com/400x400?text=Sin+Imagen";
@@ -14,7 +14,7 @@ export default function Modal({ producto, onClose, onChangeColor, onAdd }) {
     return `/images/${imagenPath}`;
   };
 
-  // 🔹 Validación: Si no hay producto, no renderizar
+  //  Validación: Si no hay producto, no renderizar
   if (!producto) {
     console.error("Modal recibió producto undefined");
     return null;
@@ -31,7 +31,7 @@ export default function Modal({ producto, onClose, onChangeColor, onAdd }) {
               Producto
             </div>
             <img
-              src={imagenSrc(producto.chosenImage)} // ✅ CORRECCIÓN: chosenImage (no chosenImagen)
+              src={imagenSrc(producto.chosenImage)} //  CORRECCIÓN: chosenImage (no chosenImagen)
               alt={producto.name || "Producto"}
               className="w-full h-auto max-h-96 object-cover rounded-lg"
               onError={(e) => {
@@ -69,7 +69,7 @@ export default function Modal({ producto, onClose, onChangeColor, onAdd }) {
                     key={i}
                     onClick={() => onChangeColor(i)}
                     className={`w-9 h-9 rounded-md shadow-sm border ${
-                      producto.colorIndex === i // ✅ CORRECCIÓN: producto (no product)
+                      producto.colorIndex === i //  CORRECCIÓN: producto (no product)
                         ? "ring-2 ring-offset-1 ring-white/30"
                         : ""
                     }`}

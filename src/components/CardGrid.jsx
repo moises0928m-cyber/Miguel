@@ -2,14 +2,10 @@ import React from "react";
 import Card from "./Card";
 
 export default function CardGrid({ products, onOpen }) {
-  // 🔹 Filtrar productos válidos (no undefined, no null)
+  //  Filtrar productos válidos (no undefined, no null)
   const productosValidos = products?.filter((p) => p && p.id) || [];
 
-  console.log("📊 Total productos recibidos:", products?.length || 0);
-  console.log("✅ Productos válidos:", productosValidos.length);
-  console.log("🔍 Primeros 3 productos:", productosValidos.slice(0, 3));
-
-  // 🔹 Si no hay productos válidos
+  //  Si no hay productos válidos
   if (productosValidos.length === 0) {
     return (
       <div className="bg-[#2A2A2A] p-8 rounded-lg border border-[#3A3A3A] text-center">

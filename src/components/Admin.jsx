@@ -14,22 +14,22 @@ export default function Admin({ name }) {
   const navigate = useNavigate();
   const fileInputRef = useRef(null);
 
-  // 🔹 Estados para productos
+  //  Estados para productos
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // 🔹 Estados para el formulario
+  //  Estados para el formulario
   const [showForm, setShowForm] = useState(false);
   const [editingProduct, setEditingProduct] = useState(null);
   const [categories, setCategories] = useState([]);
 
-  // 🔹 Estados para imágenes
+  //  Estados para imágenes
   const [uploadingImages, setUploadingImages] = useState(false);
   const [imagePreviews, setImagePreviews] = useState([]);
   const [imageFiles, setImageFiles] = useState([]);
 
-  // 🔹 Estado del formulario
+  //  Estado del formulario
   const [form, setForm] = useState({
     title: "",
     price: "",
@@ -38,7 +38,7 @@ export default function Admin({ name }) {
     images: [], // Ahora será un array de URLs de Cloudinary
   });
 
-  // 🔹 Toast para notificaciones
+  //  Toast para notificaciones
   const [toast, setToast] = useState({ show: false, message: "", type: "" });
 
   const showToast = (message, type = "info") => {
@@ -46,7 +46,7 @@ export default function Admin({ name }) {
     setTimeout(() => setToast({ show: false, message: "", type: "" }), 3000);
   };
 
-  // 🔹 Cargar productos y categorías al montar
+  //  Cargar productos y categorías al montar
   useEffect(() => {
     loadProducts();
     loadCategories();
@@ -75,15 +75,15 @@ export default function Admin({ name }) {
     }
   };
 
-  // 🔹 Función para subir imágenes a Cloudinary
+  //  Función para subir imágenes a Cloudinary
   const uploadToCloudinary = async (file) => {
     try {
       const formData = new FormData();
       formData.append("file", file);
-      formData.append("upload_preset", "Nogales"); // 🔹 Tu upload preset
+      formData.append("upload_preset", "Nogales"); //  Tu upload preset
 
       const response = await fetch(
-        "https://api.cloudinary.com/v1_1/dcejivtbg/image/upload", // 🔹 Tu cloud name
+        "https://api.cloudinary.com/v1_1/dcejivtbg/image/upload", //  Tu cloud name
         {
           method: "POST",
           body: formData,
@@ -96,16 +96,15 @@ export default function Admin({ name }) {
         console.error("Error de Cloudinary:", data.error);
         return null;
       }
-
-      console.log("✅ Imagen subida a Cloudinary:", data.secure_url);
+      console.log(" Imagen subida a Cloudinary:", data.secure_url);
       return data.secure_url;
     } catch (error) {
-      console.error("❌ Error al subir a Cloudinary:", error);
+      console.error(" Error al subir a Cloudinary:", error);
       return null;
     }
   };
 
-  // 🔹 Manejar selección de archivos
+  //  Manejar selección de archivos
   const handleFileSelect = (e) => {
     const files = Array.from(e.target.files);
 
@@ -119,13 +118,13 @@ export default function Admin({ name }) {
     showToast(`${files.length} imagen(es) seleccionada(s)`, "success");
   };
 
-  // 🔹 Eliminar imagen de la preview
+  //  Eliminar imagen de la preview
   const removeImagePreview = (index) => {
     setImagePreviews((prev) => prev.filter((_, i) => i !== index));
     setImageFiles((prev) => prev.filter((_, i) => i !== index));
   };
 
-  // 🔹 Subir todas las imágenes a Cloudinary
+  //  Subir todas las imágenes a Cloudinary
   const uploadAllImages = async () => {
     if (imageFiles.length === 0) return [];
 
@@ -155,12 +154,12 @@ export default function Admin({ name }) {
     return validUrls;
   };
 
-  // 🔹 Manejar cambios en el formulario
+  //  Manejar cambios en el formulario
   const handleFormChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  // 🔹 Crear producto
+  //  Crear producto
   const handleCreate = async (e) => {
     e.preventDefault();
 
@@ -205,7 +204,7 @@ export default function Admin({ name }) {
     }
   };
 
-  // 🔹 Editar producto
+  //  Editar producto
   const handleEdit = async (e) => {
     e.preventDefault();
 
@@ -242,7 +241,7 @@ export default function Admin({ name }) {
     }
   };
 
-  // 🔹 Eliminar producto
+  //  Eliminar producto
   const handleDelete = async (id) => {
     if (!confirm("¿Estás seguro de eliminar este producto?")) return;
 
@@ -256,7 +255,7 @@ export default function Admin({ name }) {
     }
   };
 
-  // 🔹 Preparar edición
+  // Preparar edición
   const startEdit = (product) => {
     setEditingProduct(product);
     setForm({
@@ -271,7 +270,7 @@ export default function Admin({ name }) {
     setShowForm(true);
   };
 
-  // 🔹 Resetear formulario
+  //  Resetear formulario
   const resetForm = () => {
     setShowForm(false);
     setEditingProduct(null);
@@ -289,7 +288,7 @@ export default function Admin({ name }) {
     }
   };
 
-  // 🔹 Cerrar sesión
+  //  Cerrar sesión
   const handleLogout = () => {
     logout();
     navigate("/login");
