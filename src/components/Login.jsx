@@ -7,6 +7,7 @@ export default function Login({ onLogin }) {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [show, setShow] = useState(false);
 
   const navigate = useNavigate();
 
@@ -110,7 +111,7 @@ export default function Login({ onLogin }) {
                   value={email}
                   type="email"
                   onChange={(e) => setEmail(e.target.value)}
-                  className="mt-1 p-2 rounded-lg text-xl   focus:outline-none focus:ring "
+                  className="mt-1 p-2 rounded-lg sm:text-base md:text-lg  focus:outline-none focus:ring "
                   placeholder="ejemplo@gmail.com"
                 />
               </div>
@@ -122,11 +123,15 @@ export default function Login({ onLogin }) {
                 <input
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  type="password"
-                  className="mt-1 p-2 rounded-lg"
+                  type={show ? "text" : "password"}
+                  className="mt-1 p-2 rounded-lg text-base md:text-xl"
                   placeholder="••••••••"
                 />
-                <button className="absolute right-3 top-12" type="button">
+                <button
+                  className="absolute right-3 top-10 bo"
+                  type="button"
+                  onClick={() => setShow(!show)}
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"

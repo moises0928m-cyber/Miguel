@@ -336,10 +336,15 @@ export default function Admin({ name }) {
 
           {/* Formulario de crear/editar */}
           {showForm && (
-            <div className="bg-[#2A2A2A] p-6 rounded-lg border border-[#3A3A3A] mb-6">
-              <h3 className="text-xl font-semibold mb-4">
-                {editingProduct ? "Editar Producto" : "Crear Nuevo Producto"}
-              </h3>
+            <div className="bg-[#2A2A2A] p-6 rounded-lg border border-[#3A3A3A] mb-6 ">
+              <div className="w-full flex justify-between text-2xl font-semibold ">
+                <h3 className=" mb-4">
+                  {editingProduct ? "Editar Producto" : "Crear Nuevo Producto"}
+                </h3>
+                <p onClick={resetForm} className="text-red-600 cursor-pointer ">
+                  x
+                </p>
+              </div>
 
               <form onSubmit={editingProduct ? handleEdit : handleCreate}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
@@ -395,7 +400,7 @@ export default function Admin({ name }) {
                   </select>
                 </div>
 
-                {/* 🔹 NUEVO: Sección de subida de imágenes */}
+                {/*  Sección de subida de imágenes */}
                 <div className="mb-4">
                   <label className="block mb-2">Imágenes del Producto *</label>
 
@@ -445,14 +450,14 @@ export default function Admin({ name }) {
                             onClick={() => removeImagePreview(index)}
                             className="absolute top-1 right-1 bg-red-600 hover:bg-red-700 text-white rounded-full w-6 h-6 flex items-center justify-center opacity-0 group-hover:opacity-100 transition"
                           >
-                            ×
+                            x
                           </button>
                         </div>
                       ))}
                     </div>
                   )}
 
-                  {/* Imágenes existentes (solo al editar) */}
+                  {/* Imágenes existentes  */}
                   {editingProduct && form.images.length > 0 && (
                     <div className="mt-3">
                       <p className="text-sm text-[#B3B3B3] mb-2">

@@ -1,5 +1,5 @@
 // Services.js - API de Platzi
-const API_BASE_URL = "https://api.escuelajs.co/api/v1";
+const API = "https://api.escuelajs.co/api/v1";
 
 // Función auxiliar para obtener el token
 const getToken = () => {
@@ -25,7 +25,7 @@ export const getProducts = async (limit = 10) => {
   try {
     console.log(`🔄 Solicitando ${limit} productos de la API...`);
 
-    const response = await fetch(`${API_BASE_URL}/products?limit=${limit}`);
+    const response = await fetch(`${API}/products?limit=${limit}`);
     const data = await handleResponse(response);
 
     console.log(`✅ API respondió con ${data?.length || 0} productos`);
@@ -60,7 +60,7 @@ export const getProducts = async (limit = 10) => {
  */
 export const getProductById = async (id) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/products/${id}`);
+    const response = await fetch(`${API}/products/${id}`);
     return await handleResponse(response);
   } catch (error) {
     console.error("Error al obtener producto:", error);
@@ -80,7 +80,7 @@ export const createProduct = async (productData) => {
       throw new Error("No hay token de autenticación");
     }
 
-    const response = await fetch(`${API_BASE_URL}/products`, {
+    const response = await fetch(`${API}/products`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -108,7 +108,7 @@ export const updateProduct = async (id, productData) => {
       throw new Error("No hay token de autenticación");
     }
 
-    const response = await fetch(`${API_BASE_URL}/products/${id}`, {
+    const response = await fetch(`${API}/products/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -136,7 +136,7 @@ export const deleteProduct = async (id) => {
       throw new Error("No hay token de autenticación");
     }
 
-    const response = await fetch(`${API_BASE_URL}/products/${id}`, {
+    const response = await fetch(`${API}/products/${id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -158,7 +158,7 @@ export const deleteProduct = async (id) => {
  */
 export const getCategories = async () => {
   try {
-    const response = await fetch(`${API_BASE_URL}/categories`);
+    const response = await fetch(`${API}/categories`);
     return await handleResponse(response);
   } catch (error) {
     console.error("Error al obtener categorías:", error);
@@ -172,9 +172,7 @@ export const getCategories = async () => {
  */
 export const getProductsByCategory = async (categoryId) => {
   try {
-    const response = await fetch(
-      `${API_BASE_URL}/categories/${categoryId}/products`
-    );
+    const response = await fetch(`${API}/categories/${categoryId}/products`);
     return await handleResponse(response);
   } catch (error) {
     console.error("Error al obtener productos por categoría:", error);
@@ -196,7 +194,7 @@ export const getUserProfile = async () => {
       throw new Error("No hay token de autenticación");
     }
 
-    const response = await fetch(`${API_BASE_URL}/auth/profile`, {
+    const response = await fetch(`${API}/auth/profile`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
